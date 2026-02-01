@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoutineX - Design your daily life</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --text: #333;
+            --bg: #f9f9f9;
+            --card-bg: #fff;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        header {
+            padding: 60px 20px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        .tagline {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+            text-align: left;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .feature-card h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        .download-section {
+            background: var(--card-bg);
+            padding: 40px 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, opacity 0.2s;
+            border: 2px solid transparent;
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        .btn-android {
+            background-color: var(--primary);
+            color: white;
+        }
+        .btn-ios {
+            background-color: #007AFF;
+            color: white;
+        }
+        .btn.dimmed {
+            opacity: 0.5;
+            background-color: #eee;
+            color: #999;
+            border-color: #ddd;
+        }
+        .btn.highlighted {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .android-warning {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: left;
+            display: none; /* Hidden by default */
+        }
+        .android-warning ol {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        footer {
+            margin-top: 60px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RoutineX</h1>
+            <p class="tagline">Design your daily life. Track routines & health offline.</p>
+        </header>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Offline-first</h3>
+                <p>Your data stays on your device. No internet required.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Daily Tracking</h3>
+                <p>Manage habits, tasks, and routines effortlessly.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Insights</h3>
+                <p>View monthly reports and visualize your progress.</p>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2>Get the App</h2>
+            <div id="buttons">
+                <a href="./RoutineX-android-v1.0.apk" class="btn btn-android" id="android-btn">Download APK (Android)</a>
+                <a href="https://testflight.apple.com/join/XXXX" class="btn btn-ios" id="ios-btn">Join TestFlight (iOS)</a>
+            </div>
+
+            <div class="android-warning" id="android-instructions">
+                <strong>Note for Android Users:</strong>
+                <p>Android may warn about unknown apps. This is normal for apps not installed via Play Store.</p>
+                <ol>
+                    <li>Download APK</li>
+                    <li>Open file</li>
+                    <li>Allow "Install unknown apps"</li>
+                    <li>Install RoutineX</li>
+                </ol>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 RoutineX. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Device Detection
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const androidBtn = document.getElementById('android-btn');
+        const iosBtn = document.getElementById('ios-btn');
+        const androidInstructions = document.getElementById('android-instructions');
+
+        if (/android/i.test(userAgent)) {
+            // Android User
+            androidBtn.classList.add('highlighted');
+            iosBtn.classList.add('dimmed');
+            androidInstructions.style.display = 'block';
+        } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            // iOS User
+            iosBtn.classList.add('highlighted');
+            androidBtn.classList.add('dimmed');
+        } else {
+            // Desktop - show both equally (remove dimmed/highlighted classes if any default)
+        }
+    </script>
+</body>
+</html>
